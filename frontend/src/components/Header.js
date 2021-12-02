@@ -6,7 +6,7 @@ const Header = () => {
     //<Nav className = 'ml-auto'>
   return (
     <header>
-      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect className="navbar-dark bg-primary">
         <Container>
           
           <Navbar.Brand href='/'>Build-&-Buy</Navbar.Brand>
