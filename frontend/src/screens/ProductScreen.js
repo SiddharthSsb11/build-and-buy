@@ -1,16 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
-import products from '../products'
-
+import classes from './ProductScreen.module.css';
+import axios from 'axios';
 
 const ProductScreen = ({ match }) => {
-    const product = products.find((p) => p._id === match.params.id)
+    const params = useParams();
+    //console.log(params);
+
+    const [product, setProduct] = useState({})
+
+    useEffect(() => {
+      const fetchProduct = async () => {
+        const { data } = await axios.get(`/api/products/${params.id}`)
   
+        setProduct(data)
+      }
+  
+      fetchProduct()
+    }, [params]);
+    
+    //<ListGroup variant='flush'>
     return (
       <>
-        <Link className='btn btn-light my-3' to='/'>
+        <Link className='btn btn-outline-secondary my-3' to='/'>
           Go Back
         </Link>
         <Row>
@@ -18,18 +32,20 @@ const ProductScreen = ({ match }) => {
             <Image src={product.image} alt={product.name} fluid />
           </Col>
           <Col md={3}>
-            <ListGroup variant='flush'>
-              <ListGroup.Item>
-                <h3>{product.name}</h3>
+            <ListGroup>
+              <ListGroup.Item className = {classes.border}>
+                <h3 style={{color:'#32FBE2'}}>{product.name}</h3>
               </ListGroup.Item>
-              <ListGroup.Item>
+              <ListGroup.Item className = {classes.padding}>
                 <Rating
                   value={product.rating}
                   text={`${product.numReviews} reviews`}
                 />
               </ListGroup.Item>
-              <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-              <ListGroup.Item>Description: {product.description}</ListGroup.Item>
+              <ListGroup.Item style={{paddingBottom: "14px"}} className={classes.border}>Price: ₹{product.price}</ListGroup.Item>
+              <ListGroup.Item className={classes.padding}><h5 style={{color:'#32FBE2'}}>Description</h5> 
+                {product.description}
+              </ListGroup.Item>
             </ListGroup>
           </Col>
           <Col md={3}>
@@ -39,7 +55,7 @@ const ProductScreen = ({ match }) => {
                   <Row>
                     <Col>Price:</Col>
                     <Col>
-                      <strong>${product.price}</strong>
+                      <strong>₹{product.price}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -53,11 +69,7 @@ const ProductScreen = ({ match }) => {
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Button
-                    className='btn-block'
-                    type='button'
-                    disabled={product.countInStock === 0}
-                  >
+                  <Button className='w-100' type='button' disabled={product.countInStock === 0}>
                     Add To Cart
                   </Button>
                 </ListGroup.Item>
