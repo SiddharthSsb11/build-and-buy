@@ -1,25 +1,36 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import classes from './ProductScreen.module.css';
-import axios from 'axios';
+//import axios from 'axios';
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { listProductDetails } from '../actions/productActions'
 
 const ProductScreen = ({ match }) => {
     const params = useParams();
     //console.log(params);
 
-    const [product, setProduct] = useState({})
+    const dispatch = useDispatch();
+
+    //const [product, setProduct] = useState({})
+
+    const productDetails = useSelector((state) => state.productDetails);
+    const { loading, error, product } = productDetails;
 
     useEffect(() => {
-      const fetchProduct = async () => {
+      /* const fetchProduct = async () => {
         const { data } = await axios.get(`/api/products/${params.id}`)
   
         setProduct(data)
       }
-  
-      fetchProduct()
-    }, [params]);
+      fetchProduct() */
+
+      dispatch(listProductDetails(params.id));
+
+    }, [params, dispatch]);
     
     //<ListGroup variant='flush'>
     return (
@@ -27,6 +38,8 @@ const ProductScreen = ({ match }) => {
         <Link className='btn btn-outline-secondary my-3' to='/'>
           Go Back
         </Link>
+        {loading ? ( <Loader />) : error ? (<Message variant='danger'>{error}</Message>) : 
+        (
         <Row>
           <Col md={6}>
             <Image src={product.image} alt={product.name} fluid />
@@ -77,6 +90,7 @@ const ProductScreen = ({ match }) => {
             </Card>
           </Col>
         </Row>
+        )}
       </>
     )
   }
