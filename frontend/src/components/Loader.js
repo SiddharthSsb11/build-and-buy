@@ -2,10 +2,11 @@ import React from 'react'
 import { Spinner } from 'react-bootstrap'
 
 const Loader = () => {
+  //class='sr-only'
+  //className="visually-hidden"
+  //variant='primary'
   return (
-    <Spinner
-      animation='border'
-      role='status'
+    <Spinner animation='border' role='status' variant='secondary' 
       style={{
         width: '100px',
         height: '100px',
@@ -13,7 +14,7 @@ const Loader = () => {
         display: 'block',
       }}
     >
-      <span class='sr-only'>Loading...</span>
+      <span className="visually-hidden" >Loading...</span>
     </Spinner>
   )
 }
