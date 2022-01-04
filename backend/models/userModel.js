@@ -32,13 +32,15 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 }
 
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
+userSchema.pre('save', async function (next) {//mongoose pre-save MW
+  if (!this.isModified('password')) {//updating userporfile details gaurd clause
     next();
   }
 
-  const salt = await bcrypt.genSalt(10);
+  const salt = await bcrypt.genSalt(10);//generates salt
   this.password = await bcrypt.hash(this.password, salt);
+  //initially this.password is plane password at the time of sign-up..
+  //hashing it before we create(save)(pre-save) and storing it in db
 })
 
 const User = mongoose.model('User', userSchema);
