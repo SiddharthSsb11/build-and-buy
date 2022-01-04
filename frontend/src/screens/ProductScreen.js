@@ -13,7 +13,7 @@ const ProductScreen = ({ match }) => {
     
     const [qty, setQty] = useState(1);//useState(0)
 
-    const params = useParams();
+    const {id} = useParams();
     const navigate = useNavigate();
     //console.log(params);
 
@@ -32,13 +32,13 @@ const ProductScreen = ({ match }) => {
       }
       fetchProduct() */
 
-      dispatch(listProductDetails(params.id));
+      dispatch(listProductDetails(id));
 
-    }, [params, dispatch]);
+    }, [id, dispatch]);
     
     const addToCartHandler = () => {
       console.log('adding to cart');
-      navigate(`/cart/${params.id}?qty=${qty}`);
+      navigate(`/cart/${id}?qty=${qty}`);
       //optional?
     }
 
