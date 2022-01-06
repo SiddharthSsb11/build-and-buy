@@ -37,7 +37,7 @@ const ProductScreen = ({ match }) => {
     }, [id, dispatch]);
     
     const addToCartHandler = () => {
-      console.log('adding to cart');
+      //console.log('adding to cart');
       navigate(`/cart/${id}?qty=${qty}`);
       //optional?
     }

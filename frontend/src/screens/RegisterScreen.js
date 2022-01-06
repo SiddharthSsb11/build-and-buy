@@ -86,7 +86,7 @@ const RegisterScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary"> Register </Button>
+        <Button className="mt-3" type="submit" variant="primary"> Register </Button>
       </Form>
 
       <Row className="py-3">

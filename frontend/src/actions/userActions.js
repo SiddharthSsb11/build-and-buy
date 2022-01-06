@@ -1,9 +1,9 @@
 import axios from 'axios'
 import {
-  USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, 
+  USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_DETAILS_RESET,
   USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, 
   USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS,
-  USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS
+  USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS, USER_UPDATE_PROFILE_RESET
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -34,7 +34,11 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
+
   dispatch({ type: USER_LOGOUT });
+  dispatch({type:USER_DETAILS_RESET});///on logout erase/reset the user details
+  dispatch({ type: USER_UPDATE_PROFILE_RESET });
+
 }
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -65,68 +69,61 @@ export const register = (name, email, password) => async (dispatch) => {
 
 export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
-    dispatch({
-      type: USER_DETAILS_REQUEST,
-    })
+    dispatch({ type: USER_DETAILS_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState()
+    const { userLogin: { userInfo }} = getState(); //deep destructuring
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
+        Authorization: `Bearer ${userInfo.token}`
+      }
     }
 
-    const { data } = await axios.get(`/api/users/${id}`, config)
+    const { data } = await axios.get(`/api/users/${id}`, config); //url--/api/users/profile--be route
 
-    dispatch({
-      type: USER_DETAILS_SUCCESS,
-      payload: data,
-    })
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message
     })
   }
 }
 
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
-    dispatch({
-      type: USER_UPDATE_PROFILE_REQUEST,
-    })
 
-    const {
-      userLogin: { userInfo },
-    } = getState()
+    dispatch({ type: USER_UPDATE_PROFILE_REQUEST});
 
+    const { userLogin: { userInfo }} = getState();
+    console.log(userInfo, 'userInfo at the time of login before update');
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
+        Authorization: `Bearer ${userInfo.token}`
+      }
     }
 
     const { data } = await axios.put(`/api/users/profile`, user, config)
+    const {email, isAdmin, name, _id} = data;
 
-    dispatch({
-      type: USER_UPDATE_PROFILE_SUCCESS,
-      payload: data,
-    })
+    dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
+    //console.log(data,'updated user data response from server');
+    localStorage.setItem('userInfo', JSON.stringify(data));
+    //updating the localstorage with newly recieved token and data from server
+
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: {email, isAdmin, name, _id} });
+    //console.log('triggering user profile details');
+    
+    //console.log('triggering userInfo login_success after the update');
+    dispatch({type: USER_LOGIN_SUCCESS, payload: data}); //user profile name in header fix
+
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message
     })
   }
 }
