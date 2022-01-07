@@ -20,6 +20,9 @@ const CartScreen = () => {
 
   const dispatch = useDispatch();
 
+  //const userLogin = useSelector((state) => state.userLogin);
+  //const { userInfo } = userLogin;
+
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   //console.log(cartItems, 'cartItems from cart identifier state')
@@ -35,7 +38,14 @@ const CartScreen = () => {
   }
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping');//redirect shipping if logged in 
+  /*   if(!userInfo){
+      navigate("/login");    
+    }else{
+      navigate('/shipping');//redirect shipping if logged in
+    } */
+
+    navigate('/login/?redirect=/shipping');
+     
   }
 
   return (

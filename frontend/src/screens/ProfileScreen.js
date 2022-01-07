@@ -14,22 +14,21 @@ const ProfileScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
 
-  //const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //const location = useLocation();
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
-  console.log(user, 'user profile details');
+  //console.log(user, 'user profile details');
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  console.log(userInfo, 'userLogin details');
+  //console.log(userInfo, 'userLogin details');
 
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { /* success, */ loading: updateLoading } = userUpdateProfile;//for the update msg to vanish
-  console.log(userUpdateProfile, 'updated user data');
+  //console.log(userUpdateProfile, 'updated user data');
 
 
   useEffect(() => {
