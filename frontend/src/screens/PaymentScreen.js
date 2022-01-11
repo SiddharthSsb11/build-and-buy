@@ -12,7 +12,7 @@ const PaymentScreen = ({ history }) => {
 
   const navigate = useNavigate();
 
-  if (!shippingAddress) {
+  if (!shippingAddress.address) { ///--!shippingAddress
     navigate('/shipping');
   }
 
@@ -28,7 +28,7 @@ const PaymentScreen = ({ history }) => {
 
   return (
     <FormContainer>
-      <CheckoutSteps step1 step2 step3 />
+      <CheckoutSteps step1 step2/>
       <h1>Payment Method</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group>
@@ -54,9 +54,7 @@ const PaymentScreen = ({ history }) => {
           </Col>
         </Form.Group>
 
-        <Button type='submit' variant='primary'>
-          Continue
-        </Button>
+        <Button className="mt-3" type='submit' variant='primary'> Continue </Button>
       </Form>
     </FormContainer>
   )
