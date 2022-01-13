@@ -1,19 +1,23 @@
-import React, { /* useState */ } from 'react'
-import { Link } from 'react-router-dom'
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
-import {  useSelector } from 'react-redux'
-import Message from '../components/Message'
-import CheckoutSteps from '../components/CheckoutSteps'
+import React, { useEffect /* useState */ } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import Message from "../components/Message";
+import CheckoutSteps from "../components/CheckoutSteps";
+import { createOrder } from "../actions/orderActions";
 
 const PlaceOrderScreen = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
 
   //   Calculate prices(prefer in reducer or in be)
-/*   const addDecimals = (num) => {
+  /*   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   } */
 
-/*   cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+  /*   cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   
   cart.shippingPrice = cart.itemsPrice > 9999 ? 0 : 499;
   //cart.taxPrice = (0.18 * cart.itemsPrice).toFixed(2);
@@ -23,30 +27,54 @@ const PlaceOrderScreen = () => {
   //console.log(cart.shippingPrice, cart.taxPrice, typeof cart.itemsPrice,);
   //avoiding the mutation of cart object
 
-  const itemsPrice = cart.cartItems.reduce( (acc, item) => acc + item.price * item.qty, 0);
+  const itemsPrice = cart.cartItems.reduce(
+    (acc, item) => acc + item.price * item.qty,
+    0
+  );
   const shippingPrice = itemsPrice > 9999 ? 0 : 499;
   const taxPrice = 0.18 * itemsPrice;
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
-  
-  const placeOrderHandler = () => {
-    console.log('order');
-  }
 
-  //console.log(cart, 'order screen after maths');
-  console.log(totalPrice, 'order screen')
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreate;
+  
+  console.log(cart, 'cart state')
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order._id}`);
+    }
+    // eslint-disable-next-line
+  }, [navigate, success]);
+
+  const placeOrderHandler = () => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: itemsPrice,
+        shippingPrice: shippingPrice,
+        taxPrice: taxPrice,
+        totalPrice: totalPrice,
+      })
+    );
+  };
+
+  console.log(cart, 'order screen after maths');
+  console.log(totalPrice, "order screen");
 
   return (
     <>
       <CheckoutSteps step1 step2 step3 />
       <Row>
         <Col md={8}>
-          <ListGroup variant='flush'>
+          <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
                 <strong>Address: </strong>
-                {cart.shippingAddress.address}, {cart.shippingAddress.city}{' '}
-                {cart.shippingAddress.postalCode},{' '}
+                {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
+                {cart.shippingAddress.postalCode},{" "}
                 {cart.shippingAddress.country}
               </p>
             </ListGroup.Item>
@@ -62,7 +90,7 @@ const PlaceOrderScreen = () => {
               {cart.cartItems.length === 0 ? (
                 <Message>Your cart is empty</Message>
               ) : (
-                <ListGroup variant='flush'>
+                <ListGroup variant="flush">
                   {cart.cartItems.map((item, index) => (
                     <ListGroup.Item key={item.product}>
                       <Row>
@@ -80,7 +108,8 @@ const PlaceOrderScreen = () => {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ₹ {item.price} = ₹ {item.qty * item.price}
+                          {item.qty} x ₹ {item.price} = ₹{" "}
+                          {item.qty * item.price}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -92,7 +121,7 @@ const PlaceOrderScreen = () => {
         </Col>
         <Col md={4}>
           <Card>
-            <ListGroup variant='flush'>
+            <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>Order Summary</h2>
               </ListGroup.Item>
@@ -121,9 +150,12 @@ const PlaceOrderScreen = () => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
+                {error && <Message variant='danger'>{error}</Message>}
+              </ListGroup.Item>
+              <ListGroup.Item>
                 <Button
-                  type='button'
-                  className='btn-block mb-1'
+                  type="button"
+                  className="btn-block mb-1"
                   disabled={!cart.cartItems.length}
                   onClick={placeOrderHandler}
                 >
@@ -135,7 +167,7 @@ const PlaceOrderScreen = () => {
         </Col>
       </Row>
     </>
-  )
-}
+  );
+};
 
-export default PlaceOrderScreen
+export default PlaceOrderScreen;
