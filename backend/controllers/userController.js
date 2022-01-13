@@ -85,14 +85,16 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
 
   if (user) {
-    user.name = req.body.name || user.name
-    user.email = req.body.email || user.email
+    console.log(req.body);
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
     if (req.body.password) {
-      user.password = req.body.password
+      user.password = req.body.password;
     }
 
-    const updatedUser = await user.save()
-
+    const updatedUser = await user.save();//pre-save hook hashes the updated password before storing it in db
+    
+    //console.log(updatedUser, "updated user test");
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
@@ -101,9 +103,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       token: generateToken(updatedUser._id),
     })
   } else {
-    res.status(404)
-    throw new Error('User not found')
+    res.status(404);
+    throw new Error('User not found');
   }
 })
 
-export { authUser, registerUser, getUserProfile, updateUserProfile }
+export { authUser, registerUser, getUserProfile, updateUserProfile };
