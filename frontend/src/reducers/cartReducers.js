@@ -7,7 +7,7 @@ export const cartReducer = (state = { cartItems: [], shippingAddress: {} }, acti
       const item = action.payload;
 
       //console.log(item,'item payload');
-      console.log(state, 'state cartReducer');
+      //console.log(state, 'state cartReducer');
 
       const existingItem = state.cartItems.find((x) => x.product === item.product);
 
