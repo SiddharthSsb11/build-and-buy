@@ -15,13 +15,17 @@ const OrderScreen = () => {
   const { order, loading, error } = orderDetails
 
   if (!loading) {
-    //Total order amount
+    //Total order amount //not sved in db(not included in og schema)//thats why recalculating
     order.itemsPrice = order.orderItems.reduce( (acc, item) => acc + item.price * item.qty, 0 );
   }
 
   useEffect(() => {
-    dispatch(getOrderDetails(id))
-  }, [dispatch, id])
+
+    if(!order || order._id !== id) {
+        dispatch(getOrderDetails(id));
+    } 
+    /* dispatch(getOrderDetails(id)); */
+  }, [dispatch, id, order])
 
   return loading ? (
     <Loader />
