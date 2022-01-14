@@ -38,13 +38,13 @@ const PlaceOrderScreen = () => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
   
-  console.log(cart, 'cart state')
+  //console.log(cart, 'cart state');
   useEffect(() => {
     if (success) {
       navigate(`/order/${order._id}`);
     }
     // eslint-disable-next-line
-  }, [navigate, success]);
+  }, [navigate, success, order]);
 
   const placeOrderHandler = () => {
     dispatch(
@@ -52,16 +52,16 @@ const PlaceOrderScreen = () => {
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
-        itemsPrice: itemsPrice,
-        shippingPrice: shippingPrice,
-        taxPrice: taxPrice,
-        totalPrice: totalPrice,
+        itemsPrice, //itemsPrice: itemsPrice,
+        shippingPrice,
+        taxPrice,
+        totalPrice,
       })
     );
   };
 
-  console.log(cart, 'order screen after maths');
-  console.log(totalPrice, "order screen");
+  //console.log(cart, 'order screen after maths');
+  //console.log(totalPrice, "order screen");
 
   return (
     <>
