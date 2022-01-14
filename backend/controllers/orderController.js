@@ -85,7 +85,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     }
 
     const updatedOrder = await order.save();
-    console.log(updatedOrder, 'updatedOrder after paypal info addition');
+    //console.log(updatedOrder, 'updatedOrder after paypal info addition');
     res.json(updatedOrder);
   } else {
     res.status(404);
