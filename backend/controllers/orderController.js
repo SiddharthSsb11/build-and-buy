@@ -1,5 +1,6 @@
-import asyncHandler from 'express-async-handler'
-import Order from '../models/orderModel.js'
+import asyncHandler from 'express-async-handler';
+import Order from '../models/orderModel.js';
+import Product from '../models/productModel.js';
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -15,10 +16,24 @@ const addOrderItems = asyncHandler(async (req, res) => {
     totalPrice,
   } = req.body;
 
-  if (orderItems && orderItems.length === 0) {
-    res.status(400)
-    throw new Error('No order items');
+  //console.log(orderItems);
+  //price check btw the ordered items and product price saved in server
+  orderItems.forEach(async (item)=>{
+    //console.log(item, 'orderItems Array item');
+    
+    let productOriginal= await Product.findById(item.product);
+    //console.log(productOriginal);
+    
+    if( item.price !== productOriginal.price) {
+      res.status(400);
+      throw new Error("There is a discrepancy between the prices of the items,and whats in the Database, please try again");
+    }
+  });
 
+  if (orderItems && orderItems.length === 0) {
+    res.status(400);
+    throw new Error('No order items');
+  
   } else {
     const order = new Order({
       orderItems,
@@ -33,7 +48,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
     const createdOrder = await order.save();
 
-    res.status(201).json(createdOrder)
+    res.status(201).json(createdOrder);
   }
 })
 
