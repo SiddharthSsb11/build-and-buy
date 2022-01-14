@@ -27,10 +27,7 @@ const PlaceOrderScreen = () => {
   //console.log(cart.shippingPrice, cart.taxPrice, typeof cart.itemsPrice,);
   //avoiding the mutation of cart object
 
-  const itemsPrice = cart.cartItems.reduce(
-    (acc, item) => acc + item.price * item.qty,
-    0
-  );
+  const itemsPrice = cart.cartItems.reduce( (acc, item) => acc + item.price * item.qty, 0 );
   const shippingPrice = itemsPrice > 9999 ? 0 : 499;
   const taxPrice = 0.18 * itemsPrice;
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
