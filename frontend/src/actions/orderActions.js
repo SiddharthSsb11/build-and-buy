@@ -49,7 +49,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(`/api/orders/${id}`, config);
-    console.log(data, 'data recieved from server');
+    //console.log(data, 'data recieved from server');
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
 
   } catch (error) {
@@ -75,7 +75,7 @@ export const payOrder = (orderId, paymentResult) => async ( dispatch, getState) 
 
     const { data } = await axios.put( `/api/orders/${orderId}/pay`, paymentResult, config );
 
-    dispatch({type: ORDER_PAY_SUCCESS, payload: data });\
+    dispatch({type: ORDER_PAY_SUCCESS, payload: data });
 
   } catch (error) {
     dispatch({
