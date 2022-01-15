@@ -35,38 +35,38 @@ const OrderListScreen = ( ) => {
       ) : (
         <Table striped bordered hover responsive className='table-sm'>
           <thead>
-            <tr>
+            <tr style = {{borderBottom: '3px solid #6F42C1'}}>
               <th>ID</th>
               <th>USER</th>
               <th>DATE</th>
               <th>TOTAL</th>
               <th>PAID</th>
               <th>DELIVERED</th>
-              <th></th>
+              <th>Details</th>
             </tr>
           </thead>
           <tbody>
             {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.user && order.user.name}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>₹ {order.totalPrice}</td>
-                <td>
+              <tr style = {{borderBottom: '3px solid #6F42C1'}} key={order._id}>
+                <td style = {{padding: '10px 0px'}} >{order._id}</td>
+                <td style = {{padding: '10px 0px'}}>{order.user && order.user.name}</td>
+                <td style = {{padding: '10px 0px'}}>{order.createdAt.substring(0, 10)}</td>
+                <td style = {{padding: '10px 0px'}}>₹ {order.totalPrice}</td>
+                <td style = {{padding: '10px 0px'}}>
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
-                <td>
+                <td style = {{padding: '10px 0px'}}>
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
-                <td>
+                <td style = {{padding: '10px 0px'}}>
                   <LinkContainer to={`/order/${order._id}`}>
                     <Button variant='secondary' className='btn-sm btn-outline-secondary'>
                       Details

@@ -46,7 +46,7 @@ const UserListScreen = () => {
       ) : (
         <Table striped bordered hover responsive className='table-sm'>
           <thead>
-            <tr>
+            <tr style = {{borderBottom: '3px solid #6F42C1'}}>
               <th>ID</th>
               <th>NAME</th>
               <th>EMAIL</th>
@@ -56,20 +56,20 @@ const UserListScreen = () => {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user._id}</td>
-                <td>{user.name}</td>
-                <td>
+              <tr style = {{borderBottom: '3px solid #6F42C1'}} key={user._id}>
+                <td style = {{padding: '10px 0px'}}>{user._id}</td>
+                <td style = {{padding: '10px 0px'}}>{user.name}</td>
+                <td style = {{padding: '10px 0px'}}>
                   <a href={`mailto:${user.email}`}>{user.email}</a>
                 </td>
-                <td>
+                <td style = {{padding: '10px 0px'}}>
                   {user.isAdmin ? (
                     <i className='fas fa-check' style={{ color: 'green' }}></i>
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
-                <td>
+                <td style = {{padding: '10px 0px'}}>
                   <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <Button variant='light' className='btn-sm'>
                       <i className='fas fa-edit'></i>
