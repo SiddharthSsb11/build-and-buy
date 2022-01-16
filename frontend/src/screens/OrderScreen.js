@@ -55,7 +55,7 @@ const OrderScreen = () => {
     }
 
     if(!order || order._id !== id || successPay || successDeliver) {//(!order)
-      dispatch({ type: ORDER_PAY_RESET }); //prevents infinite loop
+      dispatch({ type: ORDER_PAY_RESET }); //prevents infinite loop //successPay value changes
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(id));
 

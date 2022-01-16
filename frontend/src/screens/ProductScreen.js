@@ -48,12 +48,16 @@ const ProductScreen = ({ match }) => {
       alert("Review Submitted!");
       setRating(0);
       setComment("");
+      //navigate(`/product/${id}`);
+      //dispatch(listProductDetails(id));
+      //window.location.reload();
     }
 
     if (!product._id || product._id !== id) {
       dispatch(listProductDetails(id));
-      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+      //dispatch({ type: PRODUCT_CREATE_REVIEW_RESET }); //to reset any review succesSubmitted/alreadyExistFail msg
     }
+    dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
   }, [id, dispatch, successProductReview, product._id]);
 
   const addToCartHandler = () => {
@@ -65,6 +69,8 @@ const ProductScreen = ({ match }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(createProductReview(id, { rating, comment }));
+    dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+
   };
 
   //<ListGroup variant='flush'>
@@ -194,6 +200,7 @@ const ProductScreen = ({ match }) => {
                       <Form.Group controlId="rating">
                         <Form.Label>Rating</Form.Label>
                         <Form.Control
+                          className="form-select" 
                           as="select"
                           value={rating}
                           onChange={(e) => setRating(e.target.value)}
