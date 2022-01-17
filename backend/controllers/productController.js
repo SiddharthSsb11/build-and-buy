@@ -1,14 +1,24 @@
 import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
-import Order from '../models/orderModel.js';
+//import Order from '../models/orderModel.js';
 
 // @desc    Fetch all products
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
 
+
+
+  //const products = await Product.find({});
+
+  /* const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const count = await Product.count(); */
+  const products = await Product.find({}) //.limit(pageSize).skip(pageSize * (page - 1));
   res.json(products);
+
+  //res.json({ products, page, pages: Math.ceil(count / pageSize) });
 })
 
 // @desc    Fetch single product
@@ -29,7 +39,7 @@ const getProductById = asyncHandler(async (req, res) => {
 // @desc    Register a new user
 // @route   POST /api/users
 // @access  Public
-const registerUser = asyncHandler(async (req, res) => {
+/* const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
@@ -57,7 +67,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Invalid user data');
   }
-});
+}); */
 
 // @desc    Create new review
 // @route   POST /api/products/:id/reviews
@@ -108,4 +118,4 @@ const getTopProducts = asyncHandler(async (req, res) => {
 })
 
 
-export { getProducts, getProductById, registerUser, createProductReview, getTopProducts };
+export { getProducts, getProductById, createProductReview, getTopProducts };
