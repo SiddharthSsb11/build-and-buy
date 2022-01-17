@@ -79,7 +79,7 @@ export const productTopRatedReducer = (state = { products: [] }, action) => {
 
     case PRODUCT_TOP_FAIL:
       return { loading: false, error: action.payload }
-      
+
     default:
       return state
   }

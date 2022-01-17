@@ -19,7 +19,7 @@ import {
   listProductDetails,
   createProductReview,
 } from "../actions/productActions";
-import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
+//import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
 const ProductScreen = ({ match }) => {
   const [qty, setQty] = useState(1); //useState(0)
@@ -41,7 +41,11 @@ const ProductScreen = ({ match }) => {
   const { userInfo } = userLogin;
 
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
-  const { success: successProductReview, error: errorProductReview, loading: loadingProductReview} = productReviewCreate;
+  const {
+    success: successProductReview,
+    error: errorProductReview,
+    loading: loadingProductReview,
+  } = productReviewCreate;
 
   useEffect(() => {
     if (successProductReview) {
@@ -49,7 +53,7 @@ const ProductScreen = ({ match }) => {
       setRating(0);
       setComment("");
       //navigate(`/product/${id}`);
-      //dispatch(listProductDetails(id));
+      dispatch(listProductDetails(id)); //alternativ of reload/refresh to show the published review
       //window.location.reload();
     }
 
@@ -57,7 +61,7 @@ const ProductScreen = ({ match }) => {
       dispatch(listProductDetails(id));
       //dispatch({ type: PRODUCT_CREATE_REVIEW_RESET }); //to reset any review succesSubmitted/alreadyExistFail msg
     }
-    dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+    //dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
   }, [id, dispatch, successProductReview, product._id]);
 
   const addToCartHandler = () => {
@@ -69,8 +73,7 @@ const ProductScreen = ({ match }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(createProductReview(id, { rating, comment }));
-    dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
-
+    //dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
   };
 
   //<ListGroup variant='flush'>
@@ -175,68 +178,79 @@ const ProductScreen = ({ match }) => {
             <Col md={6}>
               <h2>Reviews</h2>
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
-              <ListGroup variant="flush" >
+              <ListGroup variant="flush">
                 {product.reviews.map((review) => (
-                  <ListGroup.Item key={review._id} >
+                  <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
                     <p>{review.createdAt.substring(0, 10)}</p>
-                    <p className={classes.border} style={{paddingBottom: "27px"}}>{review.comment}</p>
+                    <p
+                      className={classes.border}
+                      style={{ paddingBottom: "27px" }}
+                    >
+                      {review.comment}
+                    </p>
                   </ListGroup.Item>
                 ))}
-                <ListGroup.Item>
-                  <h2>Write a Customer Review</h2>
-                  {successProductReview && (
-                    <Message variant="success">
-                      Review submitted successfully
-                    </Message>
-                  )}
-                  {loadingProductReview && <Loader />}
-                  {errorProductReview && (
-                    <Message variant="danger">{errorProductReview}</Message>
-                  )}
-                  {userInfo ? (
-                    <Form onSubmit={submitHandler}>
-                      <Form.Group controlId="rating">
-                        <Form.Label>Rating</Form.Label>
-                        <Form.Control
-                          className="form-select" 
-                          as="select"
-                          value={rating}
-                          onChange={(e) => setRating(e.target.value)}
-                        >
-                          <option value="">Select...</option>
-                          <option value="1">1 - Poor</option>
-                          <option value="2">2 - Fair</option>
-                          <option value="3">3 - Good</option>
-                          <option value="4">4 - Very Good</option>
-                          <option value="5">5 - Excellent</option>
-                        </Form.Control>
-                      </Form.Group>
-                      <Form.Group controlId="comment">
-                        <Form.Label>Comment</Form.Label>
-                        <Form.Control
-                          as="textarea"
-                          row="3"
-                          value={comment}
-                          onChange={(e) => setComment(e.target.value)}
-                        ></Form.Control>
-                      </Form.Group>
-                      <Button
-                        disabled={loadingProductReview}
-                        type="submit"
-                        variant="primary"
-                        className='mt-3'
-                      >
-                        Submit
-                      </Button>
-                    </Form>
-                  ) : (
-                    <Message>
-                      Please <Link to="/login">sign in</Link> to write a review{" "}
-                    </Message>
-                  )}
-                </ListGroup.Item>
+                {!product.reviews.some((rev) => rev.user === userInfo._id) && (/* {already submitted review check} */
+                  <>
+                    <ListGroup.Item>
+                      <h2>Write a Customer Review</h2>
+                      {successProductReview && (
+                        <Message variant="success">
+                          {" "}
+                          Review submitted successfully
+                        </Message>
+                      )}
+                      {loadingProductReview && <Loader />}
+                      {errorProductReview && (
+                        <Message variant="danger">{errorProductReview}</Message>
+                      )}
+                      {userInfo ? (
+                        <Form onSubmit={submitHandler}>
+                          <Form.Group controlId="rating">
+                            <Form.Label>Rating</Form.Label>
+                            <Form.Control
+                              className="form-select"
+                              as="select"
+                              value={rating}
+                              onChange={(e) => setRating(e.target.value)}
+                            >
+                              <option value="">Select...</option>
+                              <option value="1">1 - Poor</option>
+                              <option value="2">2 - Fair</option>
+                              <option value="3">3 - Good</option>
+                              <option value="4">4 - Very Good</option>
+                              <option value="5">5 - Excellent</option>
+                            </Form.Control>
+                          </Form.Group>
+                          <Form.Group controlId="comment">
+                            <Form.Label>Comment</Form.Label>
+                            <Form.Control
+                              as="textarea"
+                              row="3"
+                              value={comment}
+                              onChange={(e) => setComment(e.target.value)}
+                            ></Form.Control>
+                          </Form.Group>
+                          <Button
+                            disabled={loadingProductReview}
+                            type="submit"
+                            variant="primary"
+                            className="mt-3"
+                          >
+                            Submit
+                          </Button>
+                        </Form>
+                      ) : (
+                        <Message>
+                          Please <Link to="/login">sign in</Link> to write a
+                          review{" "}
+                        </Message>
+                      )}
+                    </ListGroup.Item>
+                  </>
+                )}
               </ListGroup>
             </Col>
           </Row>

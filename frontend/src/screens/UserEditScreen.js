@@ -11,7 +11,7 @@ import { USER_UPDATE_RESET, USER_DETAILS_RESET } from '../constants/userConstant
 const UserEditScreen = () => {
   
   const navigate = useNavigate();
-  const {id} = useParams();  ;
+  const {id} = useParams();  
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

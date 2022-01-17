@@ -23,7 +23,7 @@ const HomeScreen = () => {
   return (
     <>
       <ProductCarousel />
-      <h1>Latest Products</h1>
+      <h1 style={{marginTop:'8px'}}>PRODUCTS</h1>
       {loading ? (<Loader />) : error ? (<Message variant='danger'>{error}</Message>) : 
       (
         <Row>

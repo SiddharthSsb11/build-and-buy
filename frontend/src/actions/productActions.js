@@ -1,18 +1,18 @@
 import axios from "axios";
 import { 
   PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL,
-  PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, /* PRODUCT_CREATE_REVIEW_RESET */
+  PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_CREATE_REVIEW_RESET, 
   PRODUCT_CREATE_REVIEW_REQUEST, PRODUCT_CREATE_REVIEW_SUCCESS, PRODUCT_CREATE_REVIEW_FAIL,
   PRODUCT_TOP_REQUEST, PRODUCT_TOP_SUCCESS, PRODUCT_TOP_FAIL
 } from "../constants/productConstants";
 
-export const listProducts = () => async (dispatch) => {
+export const listProducts = (pageNumber = '') => async (dispatch) => {
   //asyncThunk
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
     //response.data
     //console.log(response, response.data);
-    const { data } = await axios.get("/api/products");
+    const { data } = await axios.get("/api/products"); //--/${pageNumber}
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     
@@ -34,7 +34,7 @@ export const listProductDetails = (id) => async (dispatch) => {
 
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data});
 
-    //dispatch({ type: PRODUCT_CREATE_REVIEW_RESET }); //to reset any review succesSubmitted/alreadyExistFail msg
+    dispatch({ type: PRODUCT_CREATE_REVIEW_RESET }); //to reset any review succesSubmitted/alreadyExistFail msg
     //included in prodcu detail screen
 
   } catch (error) {
@@ -62,6 +62,8 @@ export const createProductReview = (productId, review) => async ( dispatch, getS
     await axios.post(`/api/products/${productId}/reviews`, review, config);
 
     dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS });
+    //dispatch({ type: PRODUCT_CREATE_REVIEW_RESET }); //to reset any review succesSubmitted/alreadyExistFail msg
+
 
   } catch (error) {
     dispatch({

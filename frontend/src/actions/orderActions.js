@@ -18,7 +18,8 @@ import {
   ORDER_DELIVER_FAIL,
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_REQUEST
-} from '../constants/orderConstants'
+} from '../constants/orderConstants';
+import { CART_CLEAR_ITEMS } from '../constants/cartConstants';
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
@@ -34,8 +35,12 @@ export const createOrder = (order) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.post('/api/orders', order, config);
-    console.log(data,'from server');
+    //console.log(data,'from server');
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
+    //after placing the order//empty the cart
+    dispatch({ type: CART_CLEAR_ITEMS });
+    //dispatch({ type: CART_CLEAR_ITEMS, payload: data });
+    localStorage.removeItem('cartItems');
 
   } catch (error) {
     dispatch({
