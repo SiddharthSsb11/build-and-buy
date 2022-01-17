@@ -4,16 +4,21 @@
 
 ## Description
 ```
-An eCommerce platform where you can buy all the necessary components and peripherals to build your <br/> 
-best gaming station or upgrade your current system to complete and unleash the <br/> 
+An eCommerce platform where you can buy all the necessary components and peripherals to build your
+best gaming station or upgrade your current system to complete and unleash the 
 ultimate, efficient, powerful beast that your gaming setup aims to be.
 ```
-
 ```
 This is still a work in progress
 If you find anything buggy you can report it to me.
-
 ```
+### Few Screenshots
+
+![HomeScreen](/screenshots/home.png "HomeScreen")
+![AdminOrderListScreen](/screenshots/2.png "AdminOrdersListScreen")
+![AdminUsersListScreen](/screenshots/3.png "AdminUsersListScreen")
+![UsersProfileScreen](/screenshots/4.png "UsersProfileScreen")
+
 
 ### Sample
 
