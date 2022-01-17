@@ -6,6 +6,7 @@ import Product from "../components/Product";
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import ProductCarousel from '../components/ProductCarousel';
+import Meta from '../components/Meta';
 import { listProducts } from "../actions/productActions";
 //import axios from 'axios'
 
@@ -22,8 +23,9 @@ const HomeScreen = () => {
 
   return (
     <>
+      <Meta />
       <ProductCarousel />
-      <h1 style={{marginTop:'8px'}}>PRODUCTS</h1>
+      <h1 style={{marginTop:'8px'}}>Components & Peripherals</h1>
       {loading ? (<Loader />) : error ? (<Message variant='danger'>{error}</Message>) : 
       (
         <Row>

@@ -19,6 +19,7 @@ import {
   listProductDetails,
   createProductReview,
 } from "../actions/productActions";
+import Meta from '../components/Meta'
 //import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
 const ProductScreen = ({ match }) => {
@@ -88,6 +89,7 @@ const ProductScreen = ({ match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
+          <Meta title={product.name} />
           <Row>
             <Col md={6}>
               <Image src={product.image} alt={product.name} fluid />
@@ -196,7 +198,7 @@ const ProductScreen = ({ match }) => {
                   <>
                     <ListGroup.Item>
                       <h2>Write a Customer Review</h2>
-                      {successProductReview && (
+                      {loadingProductReview && (
                         <Message variant="success">
                           {" "}
                           Review submitted successfully
