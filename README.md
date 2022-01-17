@@ -4,7 +4,40 @@
 
 ## Description
 ```
-An eCommerce platform where you can buy all the necessary components and peripherals to build your yet best gaming station or upgrade your current system to complete and unleash the ultimate, efficient, powerful beast that your gaming setup aims to be.
+An eCommerce platform where you can buy all the necessary components and peripherals to build your <br/> 
+best gaming station or upgrade your current system to complete and unleash the <br/> 
+ultimate, efficient, powerful beast that your gaming setup aims to be.
+```
+
+```
+This is still a work in progress
+If you find anything buggy you can report it to me.
+
+```
+
+### Sample
+
+```
+Sample User Logins
+
+sid@test.com (Admin)
+sidtest
+
+max@test.com (Customer)
+maxtest
+
+mario@test.com (Customer)
+mariotest
+
+agent47@test.com (Customer)
+agent47test
+```
+
+```
+Sample Payment Gateway User Logins
+
+sb-tregl11668856@personal.example.com
+Y%7XuL+g
 ```
 
 ## Features
@@ -19,6 +52,9 @@ An eCommerce platform where you can buy all the necessary components and periphe
 - Checkout process (shipping, payment method, etc)
 - PayPal / credit card integration
 - Database seeder (products & users)
+
+
+
 
 ## Usage
 
@@ -70,29 +106,4 @@ You can use the following commands to seed the database with some sample users a
 npm run data:import
 # Destroy data
 npm run data:destroy
-```
-
-```
-Sample User Logins
-sid@test.com (Admin)
-sidtest
-max@test.com (Customer)
-maxtest
-mario@test.com (Customer)
-mariotest
-agent47@test.com (Customer)
-agent47test
-```
-
-```
-Sample Payment Gateway User Logins
-sb-tregl11668856@personal.example.com
-Y%7XuL+g
-```
-
-
-```
-This is still a work in progress
-If you find anything buggy you can report it to me.
-
 ```
