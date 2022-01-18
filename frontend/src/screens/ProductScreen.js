@@ -201,7 +201,7 @@ const ProductScreen = ({ match }) => {
                       {loadingProductReview && (
                         <Message variant="success">
                           {" "}
-                          Review submitted successfully
+                          Submitting Review...
                         </Message>
                       )}
                       {loadingProductReview && <Loader />}
