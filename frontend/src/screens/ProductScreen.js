@@ -27,7 +27,7 @@ const ProductScreen = ({ match }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
-  const { id } = useParams();
+  const {id} = useParams();
   const navigate = useNavigate();
   //console.log(params);
 
@@ -194,8 +194,8 @@ const ProductScreen = ({ match }) => {
                     </p>
                   </ListGroup.Item>
                 ))}
-                {!product.reviews.some((rev) => rev.user === userInfo._id) && (/* {already submitted review check} */
-                  <>
+                
+                  
                     <ListGroup.Item>
                       <h2>Write a Customer Review</h2>
                       {loadingProductReview && (
@@ -251,8 +251,8 @@ const ProductScreen = ({ match }) => {
                         </Message>
                       )}
                     </ListGroup.Item>
-                  </>
-                )}
+                  
+                
               </ListGroup>
             </Col>
           </Row>
