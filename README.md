@@ -15,7 +15,7 @@ If you find anything buggy you can report it to me.
 ### Few Screenshots
 
 ![HomeScreen](/screenshots/home.png "HomeScreen")
-![AdminOrderListScreen](/screenshots/2.png "AdminOrdersListScreen")
+![AdminOrderListScreen](/screenshots/orders.png "AdminOrdersListScreen")
 ![AdminUsersListScreen](/screenshots/3.png "AdminUsersListScreen")
 ![UsersProfileScreen](/screenshots/4.png "UsersProfileScreen")
 
