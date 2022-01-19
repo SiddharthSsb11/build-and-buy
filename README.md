@@ -12,13 +12,6 @@ ultimate, efficient, powerful beast that your gaming setup aims to be.
 This is still a work in progress
 If you find anything buggy you can report it to me.
 ```
-### Few Screenshots
-
-![HomeScreen](/screenshots/home.png "HomeScreen")
-![AdminOrderListScreen](/screenshots/orders.png "AdminOrdersListScreen")
-![AdminUsersListScreen](/screenshots/3.png "AdminUsersListScreen")
-![UsersProfileScreen](/screenshots/4.png "UsersProfileScreen")
-
 
 ### Sample
 
@@ -44,6 +37,12 @@ Sample Payment Gateway User Logins
 sb-tregl11668856@personal.example.com
 Y%7XuL+g
 ```
+### Few Screenshots
+
+![HomeScreen](/screenshots/home.png "HomeScreen")
+![AdminOrderListScreen](/screenshots/orders.png "AdminOrdersListScreen")
+![AdminUsersListScreen](/screenshots/3.png "AdminUsersListScreen")
+
 
 ## Features
 
