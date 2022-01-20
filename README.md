@@ -32,10 +32,13 @@ agent47test
 ```
 
 ```
-Sample Payment Gateway User Logins
+Sample Payment Gateway User Logins 
 
 sb-tregl11668856@personal.example.com
 Y%7XuL+g
+
+Or create a paypal USA developers account by going on  https://developer.paypal.com/developer/applications
+and use your personal account type for making payments.
 ```
 ### Few Screenshots
 
