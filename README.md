@@ -88,6 +88,11 @@ npm install
 ```
 # Run frontend (:3000) & backend (:5000)
 npm run dev
+
+# Run frontend only
+cd frontend
+npm start 
+
 # Run backend only
 npm run server
 ```
