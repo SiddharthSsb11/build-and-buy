@@ -19,33 +19,30 @@ Pull requests are always welcome. For major changes,
 please open an issue first to discuss what you would like to change.
 ```
 
-### Sample
+## Sample
 
 ```
 Sample User Logins
-
-sid@test.com (Admin)
-sidtest
-
-max@test.com (Customer)
-maxtest
-
-mario@test.com (Customer)
-mariotest
-
-agent47@test.com (Customer)
-agent47test
 ```
 
+| Email | Password  |
+| -------- | --------- |
+| sid@test.com (Admin) | sidtest |
+| max@test.com (Customer) | maxtest |
+|mario@test.com (Customer) | mariotest |
+
+
+**Sample Payment Gateway User Logins** 
+
+| Email | Password  |
+| -------- | --------- |
+| sb-tregl11668856@personal.example.com | Y%7XuL+g |
+
 ```
-Sample Payment Gateway User Logins 
-
-sb-tregl11668856@personal.example.com
-Y%7XuL+g
-
 Or create a paypal USA developers account by going on  https://developer.paypal.com/developer/applications
 and use your personal account type for making payments.
 ```
+
 ### Few Screenshots
 
 ![HomeScreen](/screenshots/home.png "HomeScreen")
