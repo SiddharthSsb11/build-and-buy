@@ -21,18 +21,16 @@ please open an issue first to discuss what you would like to change.
 
 ## Sample
 
-```
-Sample User Logins
-```
+```Sample User Logins```
 
 | Email | Password  |
 | -------- | --------- |
 | sid@test.com (Admin) | sidtest |
-| max@test.com (Customer) | maxtest |
-|mario@test.com (Customer) | mariotest |
+| max@test.com | maxtest |
+| mario@test.com | mariotest |
 
 
-**Sample Payment Gateway User Logins** 
+```Sample Payment Gateway User Logins```
 
 | Email | Password  |
 | -------- | --------- |
