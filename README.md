@@ -8,9 +8,15 @@ An eCommerce platform where you can buy all the necessary components and periphe
 best gaming station or upgrade your current system to complete and unleash the 
 ultimate, efficient, powerful beast that your gaming setup aims to be.
 ```
+This application uses [React JS](https://reactjs.org/docs/getting-started.html) component oriented UI creation paradigm. All components are written in [JSX](https://reactjs.org/docs/jsx-in-depth.html) and ES6 style and are
+combined to get a single build for production purpose using [Webpack 5](https://webpack.js.org/concepts/).
+
+Back end is implemented using [Node JS](https://nodejs.org/en/docs), [Express JS](https://expressjs.com/en/api.html) and [MongoDB](https://docs.mongodb.com/). [Atlas](https://www.mongodb.com/cloud/atlas), the _Cloud_ version of [MongoDB](https://docs.mongodb.com/) is used. 
+
 ```
-This is still a work in progress
-If you find anything buggy you can report it to me.
+If you find any bugs you can report it to me.
+Pull requests are always welcome. For major changes, 
+please open an issue first to discuss what you would like to change.
 ```
 
 ### Sample
@@ -51,6 +57,7 @@ and use your personal account type for making payments.
 ## Features
 
 - Full featured shopping cart
+- It is a Full Stack Application
 - Product reviews and ratings
 - Top products carousel
 - User profile with orders
@@ -59,10 +66,13 @@ and use your personal account type for making payments.
 - Mark orders as delivered option
 - Checkout process (shipping, payment method, etc)
 - PayPal / credit card integration
-- Database seeder (products & users)
+- Database seeder (products)
+- All of the data is stored in the database i.e. <i>persistant</i>
 
 
+## Hosted/Deployed
 
+https://buildbuy.herokuapp.com/ 
 
 ## Usage
 
