@@ -41,14 +41,6 @@ Or create a paypal USA developers account by going on  https://developer.paypal.
 and use your personal account type for making payments.
 ```
 
-### Few Screenshots
-
-![HomeScreen](/screenshots/home.png "HomeScreen")
-![AdminOrderListScreen](/screenshots/orders.png "AdminOrdersListScreen")
-![AdminUsersListScreen](/screenshots/3.png "AdminUsersListScreen")
-![UserProfileScreen](/screenshots/4.png "UsersProfileScreen")
-
-
 ## Features
 
 - Full featured shopping cart
