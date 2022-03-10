@@ -3,11 +3,20 @@ import { useNavigate } from 'react-router-dom';
  
 export default function SearchBox() {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
+  const [keyword, setKeyword] = useState('');
+
   const submitHandler = (e) => {
     e.preventDefault();
-    navigate(`/search/name/${name}`);
+    console.log(keyword, "search box text")
+    if(keyword.trim()){
+        //navigate(`/search/keword/${keyword}`);
+        navigate(`/search/${keyword}`);
+    }else{
+        navigate('/')
+    }
+
   };
+
   return (
    <div>hello</div>
   );
