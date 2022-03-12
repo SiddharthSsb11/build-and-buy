@@ -21,6 +21,10 @@ const HomeScreen = () => {
     dispatch(listProducts());
   }, [dispatch]);
 
+  //products.length === 0? <div>Product not found</div>:
+
+  //filters //price sorting //category sorting //out of stock filtering  
+
   return (
     <>
       <Meta />

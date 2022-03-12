@@ -30,20 +30,20 @@ const authUser = asyncHandler(async (req, res) => {
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
-  
+
     const userExists = await User.findOne({ email });
-  
+
     if (userExists) {
       res.status(400);
       throw new Error('User already exists');
     }
-  
+
     const user = await User.create({
       name,
       email,
-      password,//mongoose mw to encrypt it before saving(creating) this doc in db
+      password,//mongoose mw to encrypt it before saving(creating) this doc in db//pre-save hook MW
     })
-  
+
     if (user) {
       res.status(201).json({
         _id: user._id,
@@ -64,7 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
 const getUserProfile = asyncHandler(async (req, res) => {
 
     const user = await User.findById(req.user._id);
-  
+
     if (user) {
       res.json({
         _id: user._id,
@@ -77,7 +77,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       throw new Error('User not found');
     }
 })
-  
+
 // @desc    Update user profile
 // @route   PUT /api/users/profile
 // @access  Private
@@ -93,7 +93,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     }
 
     const updatedUser = await user.save();//pre-save hook hashes the updated password before storing it in db
-    
+
     //console.log(updatedUser, "updated user test");
     res.json({
       _id: updatedUser._id,
