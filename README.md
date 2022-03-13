@@ -48,6 +48,10 @@ Or create a paypal USA developers account by going on  https://developer.paypal.
 and use your personal account type for making payments.
 ```
 
+## Hosted/Deployed
+
+https://buildbuy.herokuapp.com/ 
+
 ## Features
 
 - Full featured shopping cart
@@ -66,9 +70,10 @@ and use your personal account type for making payments.
 - All of the data is stored in the database i.e. <i>persistant</i>
 
 
-## Hosted/Deployed
+## Tech Stack
 
-https://buildbuy.herokuapp.com/ 
+__Frontend:__ React, Bootstrap, Redux <br>
+__Backend:__ NodeJS, Exress, MongoDB, Mongoose.    
 
 ## Usage
 
