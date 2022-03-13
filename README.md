@@ -54,6 +54,8 @@ and use your personal account type for making payments.
 - It is a Full Stack Application
 - Product reviews and ratings
 - Top products carousel
+- Search as per your interest and requirement.
+- Apply desired filters for fast product selection. 
 - User profile with orders
 - Admin user management
 - Admin Order details page
