@@ -71,12 +71,22 @@ const LoginScreen = () => {
           Sign In{" "}
         </Button>
         <Button className="mt-3" type="button" variant="secondary" 
+          style={{ marginRight: "1rem" }}  
+          onClick={() => {
+            setEmail("max@test.com");
+            setPassword("maxtest");
+          }}
+        >
+          {" "}
+          Guest Sign In{" "}
+        </Button>
+        <Button className="mt-3" type="button" variant="primary" 
           onClick={() => {
             setEmail("sid@test.com");
             setPassword("sidtest");
           }}>
           {" "}
-          Guest User Sign In{" "}
+          Admin Sign In{" "}
         </Button>
       </Form>
 
