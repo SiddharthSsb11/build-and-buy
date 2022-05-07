@@ -7,7 +7,15 @@ import Product from '../models/productModel.js';
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
 
-
+  const keyword = req.query.keyword
+  ? {
+      name: {
+        $regex: req.query.keyword,
+        $options: 'i',
+      },
+    }
+  : {}
+  //console.log(keyword);
 
   //const products = await Product.find({});
 
@@ -15,7 +23,7 @@ const getProducts = asyncHandler(async (req, res) => {
   const page = Number(req.query.pageNumber) || 1;
 
   const count = await Product.count(); */
-  const products = await Product.find({}) //.limit(pageSize).skip(pageSize * (page - 1));
+  const products = await Product.find({...keyword}) //.limit(pageSize).skip(pageSize * (page - 1));
   res.json(products);
 
   //res.json({ products, page, pages: Math.ceil(count / pageSize) });

@@ -6,13 +6,14 @@ import {
   PRODUCT_TOP_REQUEST, PRODUCT_TOP_SUCCESS, PRODUCT_TOP_FAIL
 } from "../constants/productConstants";
 
-export const listProducts = (pageNumber = '') => async (dispatch) => {
+export const listProducts = (keyword = '') => async (dispatch) => {
   //asyncThunk
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
     //response.data
     //console.log(response, response.data);
-    const { data } = await axios.get("/api/products"); //--/${pageNumber}
+    //onsole.log('keyword actions', keyword)
+    const { data } = await axios.get(`/api/products?keyword=${keyword}`); //--/${pageNumber}
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     

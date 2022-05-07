@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 //import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
@@ -12,14 +13,16 @@ import { listProducts } from "../actions/productActions";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const params = useParams();
+  const keyword = params.keyword;
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
   useEffect(() => {
     //side-effect, async,http req in thunk //linking them here
-    dispatch(listProducts());
-  }, [dispatch]);
+    dispatch(listProducts(keyword));
+  }, [dispatch, keyword]);
 
   //products.length === 0? <div>Product not found</div>:
 

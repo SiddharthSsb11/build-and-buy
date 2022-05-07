@@ -37,9 +37,10 @@ const Header = () => {
           <LinkContainer to="/">
             <Navbar.Brand>Build-&-Buy</Navbar.Brand>
           </LinkContainer>
+          <SearchBox/>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
-            <SearchBox></SearchBox>
+            
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>
