@@ -35,7 +35,9 @@ const Header = () => {
       >
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Build-&-Buy</Navbar.Brand>
+            <Navbar.Brand>
+            <i class="fa-solid fa-gamepad" style={{marginRight:"0.5rem"}}></i>Build-&-Buy
+            </Navbar.Brand>
           </LinkContainer>
           <SearchBox/>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

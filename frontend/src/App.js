@@ -42,12 +42,12 @@ const App = () => {
             <Route path="/admin/orderList" element={<OrderListScreen />} />
             {/* <Route path="/search/:keyword" element={<HomeScreen />} />
             <Route path="/" element={<HomeScreen />} /> */}
-             
             <Route path="/">
               <Route path="search/:keyword" element={<HomeScreen />} />
+              <Route path="page/:pageNumber" element={<HomeScreen />} />
+              <Route path="search/:keyword/page/:pageNumber" element={<HomeScreen />} />
               <Route path="" element={<HomeScreen />} />
-            </Route> 
-            
+            </Route>  
           </Routes>
         </Container>
       </main>

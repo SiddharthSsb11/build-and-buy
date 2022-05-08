@@ -14,6 +14,10 @@ const getProducts = asyncHandler(async (req, res) => {
       },
     }
   : {} */
+
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1
+
   // Keyword searches by Name and Brand
   const keyword = req.query.keyword
     ? {
@@ -36,15 +40,12 @@ const getProducts = asyncHandler(async (req, res) => {
   //console.log(keyword);
 
   //const products = await Product.find({});
+  const count = await Product.countDocuments({ ...keyword });
+  //const products = await Product.find({ ...keyword }); //.limit(pageSize).skip(pageSize * (page - 1));
+  const products = await Product.find({ ...keyword }).limit(pageSize).skip(pageSize * (page - 1));
+  //res.json(products);
+  res.json({ products, page, pages: Math.ceil(count / pageSize) })
 
-  /* const pageSize = 8;
-  const page = Number(req.query.pageNumber) || 1;
-
-  const count = await Product.count(); */
-  const products = await Product.find({ ...keyword }); //.limit(pageSize).skip(pageSize * (page - 1));
-  res.json(products);
-
-  //res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Fetch single product

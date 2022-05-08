@@ -1,47 +1,92 @@
 import React, { useEffect } from "react";
-//import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import ProductCarousel from '../components/ProductCarousel';
-import Meta from '../components/Meta';
+import Message from "../components/Message";
+import Loader from "../components/Loader";
+import ProductCarousel from "../components/ProductCarousel";
+import Meta from "../components/Meta";
 import { listProducts } from "../actions/productActions";
+import Paginate from "../components/Paginate";
+import CoverImage from "./coverNew.png";
 //import axios from 'axios'
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  console.log(params);
+  const pageNumber = params.pageNumber;
   const keyword = params.keyword;
 
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
     //side-effect, async,http req in thunk //linking them here
-    dispatch(listProducts(keyword));
-  }, [dispatch, keyword]);
+    dispatch(listProducts(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
 
   //products.length === 0? <div>Product not found</div>:
 
-  //filters //price sorting //category sorting //out of stock filtering  
+  //filters //price sorting //category sorting //out of stock filtering
 
   return (
     <>
       <Meta />
-      <ProductCarousel />
-      <h1 style={{marginTop:'8px'}}>Components & Peripherals</h1>
-      {loading ? (<Loader />) : error ? (<Message variant='danger'>{error}</Message>) : 
-      (
-        <Row>
-          {products.map((product) => (
-            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-              <Product product={product} />
-            </Col>
-          ))}
-        </Row>
+      {!keyword ? (
+        <>
+          <img
+            src={CoverImage}
+            alt="coverPicture"
+            width="100%"
+            style={{ marginBottom: "1rem", borderBottom: '3px double #6F42C1', paddingBottom:"1rem" }}
+          />
+          {/* <h1
+            style={{
+              width: "14%",
+              color: "#EA39B8",
+              //textDecoration: "none",
+              fontSize: "20px",
+              border: "4px solid #EA39B8",
+              padding: "7px",
+              borderRadius: "1p0x",
+              letterSpacing: "1px",
+              textAlign: "center"
+            }}
+          >
+            Top Products
+          </h1> */}
+
+          <ProductCarousel />
+        </>
+      ) : (
+        <Link to="/" className="btn btn-outline-secondary my-3">
+          Go Back
+        </Link>
+      )}
+      <h1 style={{ marginTop: "8px" }}>Components & Peripherals</h1>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <>
+          {products.length === 0 && <h1 /* style={{textAlign: "center"}} */>😵 ❌ No Products Found ❌ 😵</h1>}
+          <Row>
+            {products.map((product) => (
+              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                <Product product={product} />
+              </Col>
+            ))}
+          </Row>
+          <Paginate
+            pages={pages}
+            page={page}
+            keyword={keyword ? keyword : ""}
+          />
+        </>
       )}
     </>
   );

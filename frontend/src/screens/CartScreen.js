@@ -33,7 +33,7 @@ const CartScreen = () => {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  console.log(cartItems)
+  //console.log(cartItems)
   //console.log(cartItems, 'cartItems from cart identifier state')
 
   useEffect(() => {
