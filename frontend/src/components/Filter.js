@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
 
 const Filter = ({products, setFilteredProducts}) => {
