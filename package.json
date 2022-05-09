@@ -14,7 +14,7 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
 
   },
-  "repository": {
+  "repository": { 
     "type": "git",
     "url": "git+https://github.com/SiddharthSsb11/MERN-E-Commerce.git"
   },
