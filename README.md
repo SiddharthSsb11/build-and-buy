@@ -22,9 +22,12 @@ please open an issue first to discuss what you would like to change.
 ### Few Screenshots
 
 ![HomeScreen](/screenshots/home.png "HomeScreen")
+![ProductScreen](/screenshots/1.png "ProductScreen")
+![UserProfileScreen](/screenshots/4.png "UsersProfileScreen")
+![OrderSuccessScreen](/screenshots/2.png "OrderSuccessScreen")
 ![AdminOrderListScreen](/screenshots/orders.png "AdminOrdersListScreen")
 ![AdminUsersListScreen](/screenshots/3.png "AdminUsersListScreen")
-![UserProfileScreen](/screenshots/4.png "UsersProfileScreen")
+
 
 ## Sample
 
@@ -36,6 +39,7 @@ please open an issue first to discuss what you would like to change.
 | max@test.com | maxtest |
 | mario@test.com | mariotest |
 
+Or use the guest login and admin login features.
 
 ```Sample Payment Gateway User Logins```
 
@@ -54,19 +58,21 @@ https://buildbuy.herokuapp.com/
 
 ## Features
 
-- Full featured shopping cart
-- It is a Full Stack Application
-- Product reviews and ratings
-- Top products carousel
+- Full featured shopping cart.
+- It is a Full Stack Application.
+- Product reviews and ratings.
+- Top products carousel.
 - Search as per your interest and requirement.
+- Paginated list of products.
 - Apply desired filters for fast product selection. 
-- User profile with orders
+- User profile, user details can be edited.
+- Placed order details.
 - Admin user management
-- Admin Order details page
-- Mark orders as delivered option
-- Checkout process (shipping, payment method, etc)
-- PayPal / credit card integration
-- Database seeder (products)
+- Admin Order details page.
+- Mark orders as delivered option for admins.
+- Checkout process (shipping, payment method, etc).
+- PayPal / credit card integration.
+- Database seeder (products).
 - All of the data is stored in the database i.e. <i>persistant</i>
 
 
