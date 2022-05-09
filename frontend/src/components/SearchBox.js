@@ -26,7 +26,7 @@ const SearchBox = () => {
         placeholder="Search Products..."
         className="mr-sm2 ml-sm-5"
       ></Form.Control>
-      <Button type="submit" variant="outline-success" style={{marginLeft: "0.5rem"}}>
+      <Button type="submit" variant="outline-secondary" style={{marginLeft: "0.5rem"}}>
         Search
       </Button>
     </Form>

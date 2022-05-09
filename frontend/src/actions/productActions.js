@@ -6,7 +6,7 @@ import {
   PRODUCT_TOP_REQUEST, PRODUCT_TOP_SUCCESS, PRODUCT_TOP_FAIL
 } from "../constants/productConstants";
 
-export const listProducts = (keyword = '', pageNumber = '') => async (dispatch) => {
+export const listProducts = (keyword = '', pageNumber = '', setFilteredProducts) => async (dispatch) => {
   //asyncThunk
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
@@ -16,6 +16,7 @@ export const listProducts = (keyword = '', pageNumber = '') => async (dispatch) 
     const { data } = await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`); //--/${pageNumber}
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+    setFilteredProducts(data.products);
     
   } catch (error) {
     dispatch({

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Accordion, Form, Button } from "react-bootstrap";
 import Product from "../components/Product";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -11,24 +11,38 @@ import Meta from "../components/Meta";
 import { listProducts } from "../actions/productActions";
 import Paginate from "../components/Paginate";
 import CoverImage from "./coverNew.png";
+import Filter from "../components/Filter"
 //import axios from 'axios'
 
 const HomeScreen = () => {
+  //const [filter, setFilter] = useState("");
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products, page, pages } = productList;
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  console.log('products',products);
+
   const dispatch = useDispatch();
   const params = useParams();
-  console.log(params);
+  //console.log(params);
   const pageNumber = params.pageNumber;
   const keyword = params.keyword;
 
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products, page, pages } = productList;
+  /* const productList = useSelector((state) => state.productList);
+  const { loading, error, products, page, pages } = productList; */
 
+ /*  const filterHandler = (e) => {
+    e.preventDefault();
+    console.log(filter);
+  };
+ */
   useEffect(() => {
     //side-effect, async,http req in thunk //linking them here
-    dispatch(listProducts(keyword, pageNumber));
+    dispatch(listProducts(keyword, pageNumber, setFilteredProducts));
+    //setFilteredProducts(products);
+    //// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, keyword, pageNumber]);
-
-  //products.length === 0? <div>Product not found</div>:
+  //console.log('filtered products',filteredProducts)
 
   //filters //price sorting //category sorting //out of stock filtering
 
@@ -41,7 +55,11 @@ const HomeScreen = () => {
             src={CoverImage}
             alt="coverPicture"
             width="100%"
-            style={{ marginBottom: "1rem", borderBottom: '3px double #6F42C1', paddingBottom:"1rem" }}
+            style={{
+              marginBottom: "1rem",
+              borderBottom: "3px double #6F42C1",
+              paddingBottom: "1rem",
+            }}
           />
           {/* <h1
             style={{
@@ -66,16 +84,32 @@ const HomeScreen = () => {
           Go Back
         </Link>
       )}
-      <h1 style={{ marginTop: "8px" }}>Components & Peripherals</h1>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center",}}>
+        <h1 style={{ marginTop: "8px" }}>Components & Peripherals</h1>
+
+        <Accordion style={{width:"60%"}}>
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Filters</Accordion.Header>
+            <Accordion.Body>
+              <Filter products={products} setFilteredProducts={setFilteredProducts}/>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </div>
+
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          {products.length === 0 && <h1 /* style={{textAlign: "center"}} */>😵 ❌ No Products Found ❌ 😵</h1>}
+          {products.length === 0 && (
+            <h1 /* style={{textAlign: "center"}} */>
+              😵 ❌ No Products Found ❌ 😵
+            </h1>
+          )}
           <Row>
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                 <Product product={product} />
               </Col>
