@@ -29,6 +29,16 @@ please open an issue first to discuss what you would like to change.
 ![AdminUsersListScreen](/screenshots/3.png "AdminUsersListScreen")
 
 
+## Hosted/Deployed
+
+https://buildbuy.herokuapp.com/ 
+
+## Demo Video
+<br>
+<br>
+https://www.loom.com/share/ec84cd9c386842ee8ee933b85fa50657
+<br>
+
 ## Sample
 
 ```Sample User Logins```
@@ -51,14 +61,6 @@ Or use the guest login and admin login features.
 Or create a paypal USA developers account by going on  https://developer.paypal.com/developer/applications
 and use your personal account type for making payments.
 ```
-
-## Hosted/Deployed
-
-https://buildbuy.herokuapp.com/ 
-
-## Demo Video
-
-https://www.loom.com/share/ec84cd9c386842ee8ee933b85fa50657
 
 ## Features
 
