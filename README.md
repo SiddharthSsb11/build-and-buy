@@ -56,6 +56,10 @@ and use your personal account type for making payments.
 
 https://buildbuy.herokuapp.com/ 
 
+## Demo Videos
+
+https://www.loom.com/share/ec84cd9c386842ee8ee933b85fa50657
+
 ## Features
 
 - Full featured shopping cart.
