@@ -34,10 +34,9 @@ please open an issue first to discuss what you would like to change.
 https://buildbuy.herokuapp.com/ 
 
 ## Demo Video
-<br>
-<br>
+
 https://www.loom.com/share/ec84cd9c386842ee8ee933b85fa50657
-<br>
+
 
 ## Sample
 
